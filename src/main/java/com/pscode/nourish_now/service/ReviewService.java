@@ -16,6 +16,7 @@ public class ReviewService {
     public List<Review> findAll() {
         return reviewRepository.findAll();
     }
+
     public Review findById(Long id) {
         return reviewRepository.findReviewById(id);
     }

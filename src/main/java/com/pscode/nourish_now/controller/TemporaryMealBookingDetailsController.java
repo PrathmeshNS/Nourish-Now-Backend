@@ -3,12 +3,8 @@ package com.pscode.nourish_now.controller;
 import com.pscode.nourish_now.entity.TemporaryMealBookingDetails;
 import com.pscode.nourish_now.service.TemporaryMealBookingDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("temporary-meal-details")
@@ -17,18 +13,30 @@ public class TemporaryMealBookingDetailsController {
     @Autowired
     private TemporaryMealBookingDetailsService bookingDetailsService;
 
+    @PostMapping("add-temporary-data")
+    public ResponseEntity<?> addTemporaryData(@RequestBody TemporaryMealBookingDetails temporaryMealBookingDetails) {
+        return bookingDetailsService.saveTempMeal(temporaryMealBookingDetails);
+    }
+
     @GetMapping("get-all-meal")
-    public List<TemporaryMealBookingDetails> getAllMealBookingDetails() {
+    public ResponseEntity<?> getAllMealBookingDetails() {
         return bookingDetailsService.getAllTemporaryMealDetails();
     }
 
     @GetMapping("get-hotel-booked-meal/{id}")
-    public List<TemporaryMealBookingDetails> getHotelBookingDetails(@PathVariable("id") Long hotelId) {
-        return bookingDetailsService.getHotelBooking(hotelId);
+    public ResponseEntity<?> getHotelBookingDetails(@PathVariable("id") Long id) {
+        return bookingDetailsService.getHotelBooking(id);
     }
 
     @GetMapping("get-ngo-booked-meal/{id}")
-    public List<TemporaryMealBookingDetails> getNgoBookingDetails(@PathVariable("id") Long ngoId) {
-        return bookingDetailsService.getNgoBooking(ngoId);
+    public ResponseEntity<?> getNgoBookingDetails(@PathVariable("id") Long id) {
+        return bookingDetailsService.getNgoBooking(id);
     }
+
+    @GetMapping("approve-food/{tmdId}")
+    public ResponseEntity<?> approveFood(@PathVariable("tmdId") Long tmdId) {
+        return bookingDetailsService.approveBooking(tmdId);
+    }
+
+
 }

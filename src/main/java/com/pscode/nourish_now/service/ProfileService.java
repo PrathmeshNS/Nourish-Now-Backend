@@ -27,7 +27,6 @@ public class ProfileService {
     }
 
 
-
     public UserProfile saveProfile(MultipartFile file) throws IOException {
         UserProfile profile =
                 UserProfile.builder()

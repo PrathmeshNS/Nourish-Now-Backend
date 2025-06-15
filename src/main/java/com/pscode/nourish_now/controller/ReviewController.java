@@ -16,11 +16,11 @@ public class ReviewController {
 
     @PostMapping("/save-review")
     public ResponseEntity<?> saveReview(Review review) {
-      Review review1 =  reviewService.save(review);
-      if (review1 != null) {
-          return new ResponseEntity<>("Data Inserted Successfully!!", HttpStatus.OK);
-      }
-        return new ResponseEntity<>("Something Went Wrong!!",HttpStatus.NOT_FOUND);
+        Review review1 = reviewService.save(review);
+        if (review1 != null) {
+            return new ResponseEntity<>("Data Inserted Successfully!!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Something Went Wrong!!", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/delete/{review-id}")
@@ -29,7 +29,7 @@ public class ReviewController {
         if (review != null) {
             return new ResponseEntity<>("Data Deleted Successfully!!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Something Went Wrong!!",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Something Went Wrong!!", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("get-all-review")

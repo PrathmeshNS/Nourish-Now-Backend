@@ -1,5 +1,6 @@
 package com.pscode.nourish_now.entity;
 
+import com.pscode.nourish_now.enums.MealBookingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,19 +13,16 @@ import lombok.NoArgsConstructor;
 public class TemporaryMealBookingDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tmdId;
-    private String dateTime;
-    private String description;
-    private int approxPersonCanEat;
-    private String typeOfProviding;
+    private MealBookingStatus mealBookingStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "aFood", referencedColumnName = "aId")
+    private AvailableFood food;
 
     @ManyToOne
     @JoinColumn(name = "ngoUserId", referencedColumnName = "id")
     private Users ngoUsers;
-
-    @ManyToOne
-    @JoinColumn(name = "hotelUserId", referencedColumnName = "id")
-    private Users hotelUsers;
 
 }
